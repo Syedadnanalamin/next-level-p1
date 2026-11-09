@@ -1,5 +1,4 @@
 
-// problem 1
 function multiplyValue(value: number, multiplier?: number) {
     if (multiplier != undefined) {
 
@@ -12,7 +11,7 @@ function multiplyValue(value: number, multiplier?: number) {
     }
 }
 
-// problem 2
+
 
 function processInput(value: string | number | boolean) {
 
@@ -43,7 +42,6 @@ function processInput(value: string | number | boolean) {
 
 }
 
-// problem 3
 
 function formatCoordinate(coordinate: readonly [number, number, string]) {
 
@@ -53,7 +51,6 @@ function formatCoordinate(coordinate: readonly [number, number, string]) {
 }
 
 
-// problem 4
 
 function concatenateArrays<T>(...arrays: T[][]): T[] {
 
@@ -61,12 +58,6 @@ function concatenateArrays<T>(...arrays: T[][]): T[] {
     return arrays.flat();
 }
 
-let ans = concatenateArrays<string>(["1", "2", "3"], ["4", "5", "6"]);
-
-console.log(ans);
-
-
-// problem 5
 
 
 interface Course {
@@ -80,21 +71,82 @@ interface Course {
 
 function getPopularCourses(courses: Course[], minStudent: number) {
 
-    let eligible: Course[] = courses.filter((value) => value.isPublished === true && value.students >= minStudent);
+    let eligible: Course[] = courses.filter((value) => value.isPublished && value.students >= minStudent);
 
     return eligible;
 }
 
-// Sample Input:
-const courses = [
-    { title: "TypeScript Mastery", students: 120, isPublished: true },
-    { title: "Draft Course", students: 200, isPublished: false },
-    { title: "Basic HTML", students: 45, isPublished: true },
-    { title: "Next.js Pro", students: 85, isPublished: true }
-];
-
-console.log(getPopularCourses(courses, 80))
 
 
-// problem 6
 
+
+
+function pluckValues<T, K extends keyof T>(items: T[], key: K): T[K][] {
+
+
+    return items.map((value) => value[key]);
+
+}
+
+
+
+class Employee {
+
+    protected name: string;
+    private baseSalary: number;
+
+    constructor(name: string, baseSalary: number) {
+
+        this.name = name;
+        this.baseSalary = baseSalary;
+    }
+
+    getDetails(): void {
+
+        console.log(`Employee: ${this.name}, Base Salary: ${this.baseSalary}`);
+    }
+
+}
+
+class Manager extends Employee {
+    private department: string;
+    constructor(name: string, baseSalary: number, department: string) {
+        super(name, baseSalary);
+        this.department = department;
+
+    }
+
+    getRoleInfo(): void {
+
+        console.log(`Manager of ${this.department}:${this.name}`)
+    }
+
+}
+
+
+
+
+function validateAgeAsync(age: number): Promise<string> {
+    return new Promise((resolve, reject) => {
+
+        if (age < 18) {
+            reject(new Error("Access Denied: Must be 18 or older"));
+        } else {
+            setTimeout(() => {
+                resolve("Access Granted");
+            }, 1000);
+        }
+
+    });
+}
+
+async function main() {
+    try {
+        const result = await validateAgeAsync(20);
+        console.log(result);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+main();

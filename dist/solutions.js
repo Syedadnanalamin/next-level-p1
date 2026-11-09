@@ -1,5 +1,4 @@
 "use strict";
-// problem 1
 function multiplyValue(value, multiplier) {
     if (multiplier != undefined) {
         return value * multiplier;
@@ -8,7 +7,6 @@ function multiplyValue(value, multiplier) {
         return value * 2;
     }
 }
-// problem 2
 function processInput(value) {
     if (typeof value === "string") {
         return value.trim();
@@ -25,26 +23,59 @@ function processInput(value) {
         }
     }
 }
-// problem 3
 function formatCoordinate(coordinate) {
     return `Location: ${coordinate[2]} (${coordinate[0]}, ${coordinate[1]})`;
 }
-// problem 4
 function concatenateArrays(...arrays) {
     return arrays.flat();
 }
-let ans = concatenateArrays(["1", "2", "3"], ["4", "5", "6"]);
-console.log(ans);
 function getPopularCourses(courses, minStudent) {
-    let eligible = courses.filter((value) => value.isPublished === true && value.students >= minStudent);
+    let eligible = courses.filter((value) => value.isPublished && value.students >= minStudent);
     return eligible;
 }
-// Sample Input:
-const courses = [
-    { title: "TypeScript Mastery", students: 120, isPublished: true },
-    { title: "Draft Course", students: 200, isPublished: false },
-    { title: "Basic HTML", students: 45, isPublished: true },
-    { title: "Next.js Pro", students: 85, isPublished: true }
-];
-console.log(getPopularCourses(courses, 80));
-// problem 6
+function pluckValues(items, key) {
+    return items.map((value) => value[key]);
+}
+class Employee {
+    name;
+    baseSalary;
+    constructor(name, baseSalary) {
+        this.name = name;
+        this.baseSalary = baseSalary;
+    }
+    getDetails() {
+        console.log(`Employee: ${this.name}, Base Salary: ${this.baseSalary}`);
+    }
+}
+class Manager extends Employee {
+    department;
+    constructor(name, baseSalary, department) {
+        super(name, baseSalary);
+        this.department = department;
+    }
+    getRoleInfo() {
+        console.log(`Manager of ${this.department}:${this.name}`);
+    }
+}
+function validateAgeAsync(age) {
+    return new Promise((resolve, reject) => {
+        if (age < 18) {
+            reject(new Error("Access Denied: Must be 18 or older"));
+        }
+        else {
+            setTimeout(() => {
+                resolve("Access Granted");
+            }, 1000);
+        }
+    });
+}
+async function main() {
+    try {
+        const result = await validateAgeAsync(20);
+        console.log(result);
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+main();
